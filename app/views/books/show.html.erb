@@ -1,9 +1,11 @@
-<%= link_to "編輯", edit_book_path(@book), class: "btn" %>
-<%= link_to "刪除", book_path(@book), data:{
-    turbo_method: "delete",
-    turbo_confirm: "確定刪除？"
-}, class: "btn danger" %>
-<section class="ml-2 text-lg">
+<% if current_user.own?(@book) %>
+    <%= link_to "編輯", edit_book_path(@book), class: "btn" %>
+    <%= link_to "刪除", book_path(@book), data:{
+        turbo_method: "delete",
+        turbo_confirm: "確定刪除？"
+    }, class: "btn danger" %>
+<% end %>
+<section class="text-lg">
     <h1>Title:<%= @book.title %></h1>
     <h3>Price:<%= @book.price %></h3>
     <label>
@@ -12,4 +14,24 @@
             <%= simple_format @book.description %>
         </p>
     </label>
+</section>
+<section class="text-lg">
+    <% if not current_user.own?(@book) %>        
+        <h4>留言:</h4>
+        <%= form_with model:[@book, @comment], data: { turbo: false } do |f|  %>
+            <%= f.text_area :content, class: 'field' %>        
+            <div>
+            <%= f.submit '新增留言', class:'btn'%>
+            </div>
+        <% end %>
+    <% end %>
+    <ul>
+        <% @comments.each.with_index(1) do |c, index| %>
+        <li>
+            <div><%= "\##{index} #{c.content}" %></div>
+            <div>by <%= c.user.email.split("@").first %></div>
+            <div>at <%= c.created_at.strftime("%Y/%m/%d %I:%M %p") %></div>
+        </li>            
+        <% end %>
+    </ul>
 </section>

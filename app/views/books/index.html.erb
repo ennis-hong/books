@@ -1,4 +1,6 @@
-<%= link_to "新增", new_book_path, class: "btn"%>
+<% if user_signed_in? %>
+    <%= link_to "新增", new_book_path, class: "btn"%>
+<% end %>
 <ul class="ml-2 text-lg">
     <% @books.each do |book| %>
         <li>[<%= book.user.email %>]<%= link_to book.title, book_path(book) %></li>

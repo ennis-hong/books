@@ -4,11 +4,12 @@ class User < ApplicationRecord
   confirmation: true
 
   has_many :books
+  has_many :comments
 
   before_create :encrypt_password
 
-  def encrypt_password
-    self.password = self.class.do_encrypt(self.password)
+  def own?(b)
+    book_ids.include?(b.id)
   end
 
   def self.login(data)
@@ -20,5 +21,11 @@ class User < ApplicationRecord
   def self.do_encrypt(target)
     salted_password = "*xx#{target}yy-"
     Digest::SHA256.hexdigest(salted_password)
+  end
+
+  private
+
+  def encrypt_password
+    self.password = self.class.do_encrypt(self.password)
   end
 end

@@ -4,6 +4,8 @@ class Book < ApplicationRecord
 
   belongs_to :user
 
+  has_many :comments, ->{ order(id: :desc) }
+
   default_scope { where(deleted_at: nil) }
 
   def destroy

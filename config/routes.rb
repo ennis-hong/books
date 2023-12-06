@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :books
+  resources :books do
+    resources :comments, shallow: true, only: [:create, :destroy]
+  end
 
   resource :users, except: %i[destroy] do
     collection do
