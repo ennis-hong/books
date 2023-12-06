@@ -1,0 +1,26 @@
+<% if @user.errors.any? %>
+<div class="alert">
+    <% @user.errors.full_messages.each do |message| %>
+        <p><%= message %></p>
+    <% end %>
+</div>
+<% end %>
+<section>
+<%= form_with model:@user, data: { turbo: false } do |f| %>
+    <div>
+        <%= f.label :email %>
+        <%= f.email_field :email, class: 'field' %>
+    </div>
+    <div>
+        <%= f.label :password %>
+        <%= f.password_field :password, class: 'field' %>
+    </div>
+    <div>
+        <%= f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, class: 'field' %>
+    </div>
+    <div>
+        <%= f.submit class:'btn'%>
+    </div>
+<% end %>
+</section>

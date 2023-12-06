@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.notice {
+  @apply bg-sky-500 text-white px-2 py-1;
+}
+
+.alert {
+  @apply bg-red-700 text-white px-2 py-1;
+}
+
+.btn {
+  @apply inline-block bg-sky-500 text-white px-2 py-1 rounded my-2 mx-2;
+}
+
+.danger {
+  @apply bg-rose-500;
+}
+
+.field {
+  @apply border-black border-2;
+}
+
+div {
+  @apply mb-1;
+}
+
+section {
+  @apply ml-1;
+}

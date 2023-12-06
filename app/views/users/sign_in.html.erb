@@ -1,0 +1,14 @@
+<h1 class="text-2xl">登入</h1>
+<%= form_with(url: sessions_path, scope: 'user', data: { turbo: false }) do |f| %>
+<div>
+    <%= f.label :email %>
+    <%= f.email_field :email , class: "field" %>
+</div>
+<div>
+    <%= f.label :password %>
+    <%= f.password_field :password , class: "field" %>
+</div>
+<div>
+    <%= f.submit '登入', class: "btn"%>
+</div>
+<% end %>
