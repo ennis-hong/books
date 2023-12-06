@@ -6,7 +6,16 @@
     }, class: "btn danger" %>
 <% end %>
 <section class="text-lg">
-    <h1>Title:<%= @book.title %></h1>
+    <h1 class="flex items-center gap-2 text-2xl">
+        Title:<%= @book.title %>
+        <div data-controller="like"
+            data-id="<%= @book.id %>" 
+            >
+            <%= link_to('#', data:{ action: 'like#toggle', like_target: 'btn'}) do %>
+                <%= image_tag "/images/unfavourite.png", style: 'height:20px;'%>
+            <% end %>
+        </div>
+    </h1>
     <h3>Price:<%= @book.price %></h3>
     <label>
         Description:

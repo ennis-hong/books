@@ -6,6 +6,9 @@ class User < ApplicationRecord
   has_many :books
   has_many :comments
 
+  has_many :like_books
+  has_many :liked_books, through: :like_books, source: :book
+
   before_create :encrypt_password
 
   def own?(b)

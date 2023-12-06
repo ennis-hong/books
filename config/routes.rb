@@ -1,6 +1,9 @@
 Rails.application.routes.draw do
   resources :books do
     resources :comments, shallow: true, only: [:create, :destroy]
+    # member do
+    #   post :like
+    # end
   end
 
   resource :users, except: %i[destroy] do

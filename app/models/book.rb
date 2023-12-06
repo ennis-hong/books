@@ -5,6 +5,8 @@ class Book < ApplicationRecord
   belongs_to :user
 
   has_many :comments, ->{ order(id: :desc) }
+  has_many :like_books
+  has_many :liked_user, through: :like_books, source: :user
 
   default_scope { where(deleted_at: nil) }
 
