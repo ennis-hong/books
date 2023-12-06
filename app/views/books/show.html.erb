@@ -1,4 +1,4 @@
-<% if current_user.own?(@book) %>
+<% if user_signed_in? and current_user.own?(@book) %>
     <%= link_to "編輯", edit_book_path(@book), class: "btn" %>
     <%= link_to "刪除", book_path(@book), data:{
         turbo_method: "delete",
@@ -15,8 +15,8 @@
         </p>
     </label>
 </section>
-<section class="text-lg">
-    <% if not current_user.own?(@book) %>        
+<section class="text-lg bg-slate-100 rounded">
+    <% if user_signed_in? and not current_user.own?(@book) %>        
         <h4>留言:</h4>
         <%= form_with model:[@book, @comment], data: { turbo: false } do |f|  %>
             <%= f.text_area :content, class: 'field' %>        
